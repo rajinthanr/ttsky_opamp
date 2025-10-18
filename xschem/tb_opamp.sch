@@ -6,15 +6,15 @@ S {}
 F {}
 E {}
 B 2 770 -480 1570 -80 {flags=graph
-y1=-0.40714694
-y2=1.8728531
+y1=-0.9
+y2=2.7
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.8109502
-x2=1.9772442
+x1=3.1874228e-14
+x2=0.0003
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -23,23 +23,25 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 5"
-node="vin
-vout"
+color="4 5 18"
+node="vp
+vout
+vouti"
 sim_type=tran
 autoload=1
-hilight_wave=0
-rawfile=$netlist_dir/tb_opamp.raw}
+hilight_wave=-1
+rawfile=$netlist_dir/tb_opamp.raw
+}
 B 2 770 -880 1570 -480 {flags=graph,unlocked
-y1=-1
+y1=-0.05
 y2=1.8
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-1
-x2=1
+x1=-0.050554871
+x2=0.072749692
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -49,15 +51,16 @@ unitx=1
 logx=0
 logy=0
 sim_type=dc
-color="4 5"
+color="4 5 18"
 node="vin
-vout"
+vout
+vouti"
 legend=1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw}
 B 2 1570 -880 2370 -480 {flags=graph
-y1=-0.74
-y2=2.56
+y1=-1.12
+y2=5.28
 ypos1=0
 ypos2=2
 divy=5
@@ -70,8 +73,10 @@ subdivx=10
 xlabmag=1.0
 ylabmag=1.0
 node="\\"Unity; 1\\"
-\\"Gain; vout vd /\\""
-color="4 5"
+\\"Gain; vout vin /\\"
+\\"Gain(i); vouti vin /\\"
+\\"Gain(i); vout vouti /\\""
+color="4 5 6 18"
 dataset=-1
 unitx=1
 logx=1
@@ -100,7 +105,7 @@ unitx=1
 logx=1
 logy=0
 sim_type=ac
-hilight_wave=0
+hilight_wave=-1
 color=7
 node=ph(vout)
 rawfile=$netlist_dir/tb_opamp.raw
@@ -135,6 +140,8 @@ save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
 save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
 save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
 save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
+save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
+save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
 
 op
 remzerovec 
@@ -149,16 +156,16 @@ ac dec 10 1 100Meg
 write tb_opamp.raw
 set appendwrite
 
-tran 1m 10
+tran 10n 300u
 write tb_opamp.raw
 
-*quit 0
+quit 0
 .endc
 "}
-C {lab_pin.sym} 450 -530 0 1 {name=p1 lab=Vout}
+C {lab_pin.sym} 450 -530 2 0 {name=p1 lab=Vout}
 C {lab_pin.sym} 290 -550 0 0 {name=p4 lab=Vp}
 C {lab_pin.sym} 380 -450 0 0 {name=p5 lab=VSS}
-C {lab_pin.sym} 310 -570 0 0 {name=p6 lab=Iref}
+C {lab_pin.sym} 310 -490 0 0 {name=p6 lab=Iref}
 C {lab_pin.sym} 380 -620 2 1 {name=p7 lab=VDD}
 C {vsource.sym} 330 -150 0 0 {name=Vss value=0 savecurrent=false}
 C {lab_pin.sym} 330 -180 0 1 {name=p8 sig_type=std_logic lab=VSS}
@@ -171,7 +178,8 @@ value=\{VCM\}}
 C {vcvs.sym} 500 -250 0 1 {name=E2 value=0.5}
 C {lab_pin.sym} 680 -300 1 0 {name=p10 lab=Vn}
 C {lab_pin.sym} 500 -300 1 0 {name=p11 lab=Vp}
-C {vsource.sym} 330 -270 0 0 {name=Vin value="AC=0.0001 SIN(0 0.1 10)" savecurrent=false}
+C {vsource.sym} 330 -270 0 0 {name=Vin value="AC=0.0001 SIN(0 1.8 5k 0 0)" savecurrent=false
+*PULSE(-1.8 1.8 0 0.1p 0.1p 100u 200u)}
 C {lab_pin.sym} 330 -300 0 1 {name=p9 sig_type=std_logic lab=Vin}
 C {gnd.sym} 330 -240 0 0 {name=l2 lab=GND}
 C {gnd.sym} 590 -230 0 0 {name=Vcm3 lab=GND
@@ -200,10 +208,6 @@ tclcommand="write_data [save_fet_params] $netlist_dir/[file rootname [file tail 
 textwindow $netlist_dir/[file rootname [file tail [xschem get current_name]]].save
 "
 }
-C {sky130_fd_pr/cap_mim_m3_2.sym} 560 -490 0 0 {name=C1 model=cap_mim_m3_2 W=113 L=110 MF=1 spiceprefix=X}
-C {gnd.sym} 560 -460 0 0 {name=Vcm4 lab=GND
-value=\{VCM\}}
-C {lab_pin.sym} 560 -520 3 1 {name=p15 lab=Vout}
 C {/foss/designs/ttsky_opamp/xschem/opamp.sym} 380 -530 0 0 {name=x1}
 C {devices/launcher.sym} 870 -970 0 0 {name=h2 
 descr="Load Waveforms" 
@@ -219,3 +223,8 @@ xschem annotate_op
 "
 }
 C {lab_pin.sym} 290 -510 0 0 {name=p16 lab=Vn}
+C {lab_pin.sym} 430 -520 0 1 {name=p2 lab=Vouti}
+C {lab_pin.sym} 310 -570 0 0 {name=p17 lab=EN}
+C {vsource.sym} 450 -150 0 0 {name=Ven value=1.8 savecurrent=false}
+C {lab_pin.sym} 450 -180 0 1 {name=p18 sig_type=std_logic lab=EN}
+C {gnd.sym} 450 -120 0 0 {name=l6 lab=GND}
