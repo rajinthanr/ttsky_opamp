@@ -6,14 +6,14 @@ S {}
 F {}
 E {}
 B 2 770 -480 1570 -80 {flags=graph
-y1=-0.9
-y2=2.7
+y1=-0.0042
+y2=1.9
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=3.1874228e-14
+x1=0
 x2=0.0003
 divx=5
 subdivx=1
@@ -23,25 +23,26 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 5 18"
+color="4 5 18 21"
 node="vp
 vout
-vouti"
+vouti
+vdd"
 sim_type=tran
 autoload=1
 hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 770 -880 1570 -480 {flags=graph,unlocked
-y1=-0.05
-y2=1.8
+y1=-1
+y2=1.9
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-0.050554871
-x2=0.072749692
+x1=-1
+x2=1
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -59,8 +60,8 @@ legend=1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw}
 B 2 1570 -880 2370 -480 {flags=graph
-y1=-1.12
-y2=5.28
+y1=-2.5
+y2=4
 ypos1=0
 ypos2=2
 divy=5
@@ -82,13 +83,13 @@ unitx=1
 logx=1
 logy=1
 sim_type=ac
-hilight_wave=0
+hilight_wave=-1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1570 -480 2370 -80 {flags=graph
-y1=-180
-y2=180
+y1=-160
+y2=-0.22
 ypos1=0
 ypos2=2
 divy=5
@@ -143,6 +144,14 @@ save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
 save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
 save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
 
+let t = 20
+while t <= 50
+let vsupply = 1.7
+while vsupply <= 1.9
+set temp = $&t
+alter @Vdd[dc] = $&vsupply
+echo Temperature is $t VDD is $vsupply
+
 op
 remzerovec 
 write tb_opamp.raw
@@ -158,9 +167,15 @@ set appendwrite
 
 tran 10n 300u
 write tb_opamp.raw
+set appendwrite
 
-quit 0
+let vsupply = vsupply + 0.05
+
+end
+let t = t+10
+end
 .endc
+*quit 0
 "}
 C {lab_pin.sym} 450 -530 2 0 {name=p1 lab=Vout}
 C {lab_pin.sym} 290 -550 0 0 {name=p4 lab=Vp}
