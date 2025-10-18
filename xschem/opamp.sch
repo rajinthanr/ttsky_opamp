@@ -210,7 +210,7 @@ C {vdd.sym} 1610 -740 0 0 {name=l3 lab=VDD}
 C {sky130_fd_pr/annotate_fet_params.sym} 840 -240 0 0 {name=annot3 ref=M2}
 C {sky130_fd_pr/annotate_fet_params.sym} 1660 -770 0 0 {name=annot4 ref=M8}
 C {sky130_fd_pr/annotate_fet_params.sym} 1650 -410 0 0 {name=annot5 ref=M7}
-C {opin.sym} 200 -230 0 0 {name=p22 lab=Vouti}
+C {opin.sym} 200 -240 0 0 {name=p22 lab=Vouti}
 C {lab_pin.sym} 1490 -550 2 0 {name=p23 sig_type=std_logic lab=Vouti}
 C {res.sym} 1550 -460 1 0 {name=R1
 value=10k
@@ -232,7 +232,7 @@ model=nfet_01v8
 spiceprefix=X
 }
 C {lab_pin.sym} 400 -410 0 0 {name=p24 sig_type=std_logic lab=VSS}
-C {ipin.sym} 90 -370 0 0 {name=p25 lab=EN}
+C {ipin.sym} 90 -360 0 0 {name=p25 lab=EN}
 C {lab_pin.sym} 580 -410 2 0 {name=p26 sig_type=std_logic lab=EN}
 C {lab_pin.sym} 580 -250 2 0 {name=p20 sig_type=std_logic lab=VGref}
 C {lab_pin.sym} 970 -250 2 1 {name=p28 sig_type=std_logic lab=VGref}

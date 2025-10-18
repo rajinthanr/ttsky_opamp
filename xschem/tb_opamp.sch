@@ -5,7 +5,7 @@ V {}
 S {}
 F {}
 E {}
-B 2 770 -480 1570 -80 {flags=graph
+B 2 840 -480 1640 -80 {flags=graph
 y1=-0.0042
 y2=1.9
 ypos1=0
@@ -13,8 +13,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=0
-x2=0.0003
+x1=9.9555701e-05
+x2=0.00010425944
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -33,7 +33,7 @@ autoload=1
 hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 770 -880 1570 -480 {flags=graph,unlocked
+B 2 840 -880 1640 -480 {flags=graph,unlocked
 y1=-1
 y2=1.9
 ypos1=0
@@ -59,7 +59,7 @@ vouti"
 legend=1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw}
-B 2 1570 -880 2370 -480 {flags=graph
+B 2 1640 -880 2440 -480 {flags=graph
 y1=-2.5
 y2=4
 ypos1=0
@@ -77,7 +77,7 @@ node="\\"Unity; 1\\"
 \\"Gain; vout vin /\\"
 \\"Gain(i); vouti vin /\\"
 \\"Gain(i); vout vouti /\\""
-color="4 5 6 18"
+color="4 5 18 6"
 dataset=-1
 unitx=1
 logx=1
@@ -87,7 +87,7 @@ hilight_wave=-1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 1570 -480 2370 -80 {flags=graph
+B 2 1640 -480 2440 -80 {flags=graph
 y1=-160
 y2=-0.22
 ypos1=0
@@ -111,10 +111,10 @@ color=7
 node=ph(vout)
 rawfile=$netlist_dir/tb_opamp.raw
 autoload=1}
-N 380 -620 380 -580 {lab=VDD}
-N 380 -480 380 -450 {lab=VSS}
-N 290 -510 310 -510 {lab=Vn}
-N 290 -550 310 -550 {lab=Vp}
+N 680 -580 680 -540 {lab=VDD}
+N 680 -440 680 -410 {lab=VSS}
+N 590 -470 610 -470 {lab=Vn}
+N 590 -510 610 -510 {lab=Vp}
 N 500 -220 500 -200 {lab=VCM}
 N 500 -200 680 -200 {lab=VCM}
 N 680 -220 680 -200 {lab=VCM}
@@ -126,7 +126,7 @@ C {title.sym} 160 -30 0 0 {name=l4 author="Rajinthan R"}
 C {vsource.sym} 200 -150 0 0 {name=Vdd value=1.8 savecurrent=false}
 C {lab_pin.sym} 200 -180 0 1 {name=p3 sig_type=std_logic lab=VDD}
 C {gnd.sym} 200 -120 0 0 {name=l3 lab=GND}
-C {code_shown.sym} 10 -1245 0 0 {name=SPICE only_toplevel=false value=
+C {code_shown.sym} 10 -1175 0 0 {name=SPICE only_toplevel=false value=
 "
 .include tb_opamp.save
 .options temp=27
@@ -134,54 +134,54 @@ C {code_shown.sym} 10 -1245 0 0 {name=SPICE only_toplevel=false value=
 .param VCM = 0.9
 
 .control
-save all
-save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
-save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
-save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
-save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
-save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
-save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
-save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
-save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
+   save all
+   save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
+   save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
+   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
+   save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
+   save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
+   save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
+   save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
+   save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
 
-let t = 20
-while t <= 50
-let vsupply = 1.7
-while vsupply <= 1.9
-set temp = $&t
-alter @Vdd[dc] = $&vsupply
-echo Temperature is $t VDD is $vsupply
+   let t = 20
+   while t <= 50
+      let vsupply = 1.7
+      while vsupply <= 1.9
+         set temp = $&t
+         alter @Vdd[dc] = $&vsupply
+         echo Temperature is $t VDD is $vsupply
 
-op
-remzerovec 
-write tb_opamp.raw
-set appendwrite
+         op
+         remzerovec 
+         write tb_opamp.raw
+         set appendwrite
 
-dc vin -1 1 0.01
-write tb_opamp.raw
-set appendwrite
+         dc vin -1 1 0.01
+         write tb_opamp.raw
+         set appendwrite
 
-ac dec 10 1 100Meg
-write tb_opamp.raw
-set appendwrite
+         ac dec 10 1 100Meg
+         write tb_opamp.raw
+         set appendwrite
 
-tran 10n 300u
-write tb_opamp.raw
-set appendwrite
+         tran 10n 300u
+         write tb_opamp.raw
+         set appendwrite
 
-let vsupply = vsupply + 0.05
-
-end
-let t = t+10
-end
+         let vsupply = vsupply + 0.05
+      end
+      
+      let t = t+10
+   end
 .endc
 *quit 0
 "}
-C {lab_pin.sym} 450 -530 2 0 {name=p1 lab=Vout}
-C {lab_pin.sym} 290 -550 0 0 {name=p4 lab=Vp}
-C {lab_pin.sym} 380 -450 0 0 {name=p5 lab=VSS}
-C {lab_pin.sym} 310 -490 0 0 {name=p6 lab=Iref}
-C {lab_pin.sym} 380 -620 2 1 {name=p7 lab=VDD}
+C {lab_pin.sym} 750 -490 2 0 {name=p1 lab=Vout}
+C {lab_pin.sym} 590 -510 0 0 {name=p4 lab=Vp}
+C {lab_pin.sym} 680 -410 0 0 {name=p5 lab=VSS}
+C {lab_pin.sym} 610 -450 0 0 {name=p6 lab=Iref}
+C {lab_pin.sym} 680 -580 2 1 {name=p7 lab=VDD}
 C {vsource.sym} 330 -150 0 0 {name=Vss value=0 savecurrent=false}
 C {lab_pin.sym} 330 -180 0 1 {name=p8 sig_type=std_logic lab=VSS}
 C {gnd.sym} 330 -120 0 0 {name=l1 lab=GND}
@@ -204,7 +204,7 @@ C {lab_pin.sym} 640 -270 0 0 {name=p13 sig_type=std_logic lab=Vin}
 C {vsource.sym} 200 -270 0 0 {name=Iref value=-5u savecurrent=false}
 C {lab_pin.sym} 200 -300 0 1 {name=p14 sig_type=std_logic lab=Iref}
 C {gnd.sym} 200 -240 0 0 {name=l5 lab=GND}
-C {devices/launcher.sym} 540 -940 0 0 {name=h4 
+C {devices/launcher.sym} 900 -920 0 0 {name=h4 
 descr="Load Waveforms/
 Annotate" 
 tclcommand="
@@ -213,33 +213,33 @@ set show_hidden_texts 1;
 xschem annotate_op
 "
 }
-C {devices/launcher.sym} 540 -990 0 0 {name=h5
+C {devices/launcher.sym} 900 -980 0 0 {name=h5
 descr="Netlist & sim" 
 tclcommand="xschem netlist; xschem simulate"}
 C {sky130_fd_pr/corner.sym} 20 -200 0 0 {name=CORNER only_toplevel=true corner=tt}
-C {devices/launcher.sym} 540 -1040 0 0 {name=h1
+C {devices/launcher.sym} 900 -1030 0 0 {name=h1
 descr="Generate .save lines" 
 tclcommand="write_data [save_fet_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save
 textwindow $netlist_dir/[file rootname [file tail [xschem get current_name]]].save
 "
 }
-C {/foss/designs/ttsky_opamp/xschem/opamp.sym} 380 -530 0 0 {name=x1}
-C {devices/launcher.sym} 870 -970 0 0 {name=h2 
+C {/foss/designs/ttsky_opamp/xschem/opamp.sym} 680 -490 0 0 {name=x1}
+C {devices/launcher.sym} 1230 -960 0 0 {name=h2 
 descr="Load Waveforms" 
 tclcommand="
 xschem raw_read $netlist_dir/tb_opamp.raw tran
 "
 }
-C {devices/launcher.sym} 870 -1020 0 0 {name=h3 
+C {devices/launcher.sym} 1230 -1010 0 0 {name=h3 
 descr="Annotate" 
 tclcommand="
 set show_hidden_texts 1;
 xschem annotate_op
 "
 }
-C {lab_pin.sym} 290 -510 0 0 {name=p16 lab=Vn}
-C {lab_pin.sym} 430 -520 0 1 {name=p2 lab=Vouti}
-C {lab_pin.sym} 310 -570 0 0 {name=p17 lab=EN}
+C {lab_pin.sym} 590 -470 0 0 {name=p16 lab=Vn}
+C {lab_pin.sym} 730 -480 0 1 {name=p2 lab=Vouti}
+C {lab_pin.sym} 610 -530 0 0 {name=p17 lab=EN}
 C {vsource.sym} 450 -150 0 0 {name=Ven value=1.8 savecurrent=false}
 C {lab_pin.sym} 450 -180 0 1 {name=p18 sig_type=std_logic lab=EN}
 C {gnd.sym} 450 -120 0 0 {name=l6 lab=GND}
