@@ -41,8 +41,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-0.01
-x2=0.01
+x1=-0.00089087533
+x2=0.0025000001
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -61,12 +61,12 @@ autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -880 2440 -480 {flags=graph
-y1=-0.96
-y2=4.64
+y1=-19.2
+y2=104.8
 ypos1=0
 ypos2=2
 divy=5
-subdivy=8
+subdivy=4
 unity=1
 x1=0
 x2=8
@@ -74,15 +74,13 @@ divx=10
 subdivx=10
 xlabmag=1.0
 ylabmag=1.0
-node="\\"Unity; 1\\"
-\\"Gain; vout vin /\\"
-\\"Gain(1st); vouti vin /\\"
-\\"Gain(2nd); vout vouti /\\""
-color="4 5 18 6"
+node="\\"Gain; vout vin / db20()\\"
+\\"Unity; 1\\""
+color="7 4"
 dataset=-1
 unitx=1
 logx=1
-logy=1
+logy=0
 sim_type=ac
 hilight_wave=-1
 autoload=1
@@ -111,7 +109,8 @@ hilight_wave=-1
 color=7
 node=ph(vout)
 rawfile=$netlist_dir/tb_opamp.raw
-autoload=1}
+autoload=1
+hcursor1_y=-103.06548}
 N 590 -670 590 -630 {lab=VDD}
 N 590 -530 590 -500 {lab=VSS}
 N 500 -560 520 -560 {lab=Vn}
@@ -143,7 +142,7 @@ write tb_opamp.raw
 set appendwrite
 
 let run = 0
-while run < 5
+while run < 1
    let t = 20
    while t < 60
       let vsupply = 1.7
@@ -169,7 +168,7 @@ while run < 5
          remzerovec 
          write tb_opamp.raw
 
-         dc vin -10m 10m 0.2m
+         dc vin -4m 4m 0.1m
          write tb_opamp.raw
 
          ac dec 10 1 100Meg
@@ -268,6 +267,6 @@ format="tcleval( @value )"
 value="
 ** opencircuitdesign pdks install
 .param MT_SWITCH = 1.0
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt_mm
+.lib $::SKYWATER_MODELS/sky130.lib.spice tt
 "
 spice_ignore=false}

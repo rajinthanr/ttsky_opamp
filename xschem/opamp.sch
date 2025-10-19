@@ -108,7 +108,7 @@ C {lab_pin.sym} 1080 -250 0 1 {name=p5 sig_type=std_logic lab=VSS}
 C {sky130_fd_pr/nfet_01v8.sym} 1170 -470 0 1 {name=M3
 W=10
 L=4
-nf=1
+nf=4
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -122,7 +122,7 @@ spiceprefix=X
 C {sky130_fd_pr/nfet_01v8.sym} 850 -470 0 0 {name=M4
 W=10
 L=4
-nf=1
+nf=4
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -134,9 +134,9 @@ model=nfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8.sym} 1130 -610 0 0 {name=M5
-W=10.5
-L=4.0
-nf=1
+W=8
+L=4
+nf=4
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -148,9 +148,9 @@ model=pfet_01v8
 spiceprefix=X
 }
 C {sky130_fd_pr/pfet_01v8.sym} 890 -610 0 1 {name=M6
-W=10.5
-L=4.0
-nf=1
+W=8
+L=4
+nf=4
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -177,7 +177,7 @@ C {vdd.sym} 1010 -700 0 0 {name=l2 lab=VDD}
 C {sky130_fd_pr/nfet_01v8.sym} 1590 -250 0 0 {name=M7
 W=48
 L=0.5
-nf=8
+nf=12
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -193,7 +193,7 @@ C {lab_pin.sym} 1680 -250 0 1 {name=p19 sig_type=std_logic lab=VSS}
 C {sky130_fd_pr/pfet_01v8.sym} 1590 -600 0 0 {name=M8
 W=20
 L=0.5
-nf=2
+nf=4
 mult=1
 ad="expr('int((@nf + 1)/2) * @W / @nf * 0.29')"
 pd="expr('2*int((@nf + 1)/2) * (@W / @nf + 0.29)')"
@@ -235,9 +235,10 @@ C {devices/ngspice_get_value.sym} 1280 -480 0 1 {name=r11 node=v(@m.x1.xm3.msky1
 descr="W="}
 C {devices/ngspice_get_value.sym} 1280 -450 0 1 {name=r2 node=v(@m.x1.xm3.msky130_fd_pr__nfet_01v8[L])
 descr="L="}
-C {res.sym} 1550 -460 1 0 {name=R1
-value=10k
-footprint=1206
-device=resistor
-m=1}
 C {sky130_fd_pr/cap_mim_m3_1.sym} 1490 -500 0 0 {name=C1 model=cap_mim_m3_1 W=40 L=40 MF=1 spiceprefix=X}
+C {lab_pin.sym} 1550 -480 0 1 {name=p32 sig_type=std_logic lab=VSS}
+C {sky130_fd_pr/res_xhigh_po_0p35.sym} 1550 -460 1 0 {name=R3
+L=1.75
+model=res_xhigh_po_0p35
+spiceprefix=X
+mult=1}

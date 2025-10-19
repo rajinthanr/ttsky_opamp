@@ -1,0 +1,33 @@
+** sch_path: /foss/designs/ttsky_opamp/xschem/opamp.sch
+**.subckt opamp Vout Vn Vp VSS Iref VDD Vouti EN
+*.ipin VSS
+*.ipin Vp
+*.opin Vout
+*.ipin Vn
+*.ipin VDD
+*.ipin Iref
+*.opin Vouti
+*.ipin EN
+XM1 VGref VGref VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0
++ sd=0 mult=1 m=1
+XM2 Vx VGref VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1 m=1
+XM3 Vouti Vp Vx VSS sky130_fd_pr__nfet_01v8 L=4 W=10 nf=4 ad=1.45 as=2.175 pd=11.16 ps=16.74 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1 m=1
+XM4 Vg2 Vn Vx VSS sky130_fd_pr__nfet_01v8 L=4 W=10 nf=4 ad=1.45 as=2.175 pd=11.16 ps=16.74 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1 m=1
+XM5 Vouti Vg2 VDD VDD sky130_fd_pr__pfet_01v8 L=4 W=8 nf=4 ad=1.16 as=1.74 pd=9.16 ps=13.74 nrd=0.03625 nrs=0.03625 sa=0 sb=0 sd=0
++ mult=1 m=1
+XM6 Vg2 Vg2 VDD VDD sky130_fd_pr__pfet_01v8 L=4 W=8 nf=4 ad=1.16 as=1.74 pd=9.16 ps=13.74 nrd=0.03625 nrs=0.03625 sa=0 sb=0 sd=0
++ mult=1 m=1
+XM7 Vout VGref VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=48 nf=12 ad=6.96 as=8.12 pd=51.48 ps=60.06 nrd=0.00604166666666667
++ nrs=0.00604166666666667 sa=0 sb=0 sd=0 mult=1 m=1
+XM8 Vout Vouti VDD VDD sky130_fd_pr__pfet_01v8 L=0.5 W=20 nf=4 ad=2.9 as=4.35 pd=21.16 ps=31.74 nrd=0.0145 nrs=0.0145 sa=0 sb=0
++ sd=0 mult=1 m=1
+XM9 Iref EN VGref VSS sky130_fd_pr__nfet_01v8 L=2 W=2 nf=1 ad=0.58 as=0.58 pd=4.58 ps=4.58 nrd=0.145 nrs=0.145 sa=0 sb=0 sd=0
++ mult=1 m=1
+XC1 Vouti net1 sky130_fd_pr__cap_mim_m3_1 W=40 L=40 MF=1 m=1
+XR3 net1 Vout VSS sky130_fd_pr__res_high_po W=0.5 L=15 mult=1 m=1
+**.ends
+.GLOBAL VDD
+.end

@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 B 2 840 -480 1640 -80 {flags=graph
-y1=0.43
+y1=0.69
 y2=1.9
 ypos1=0
 ypos2=2
@@ -32,9 +32,9 @@ autoload=1
 hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 840 -880 1640 -480 {flags=graph,unlocked
-y1=-0.18333335
-y2=0.49722223
+B 2 1640 -1280 2440 -880 {flags=graph,unlocked
+y1=-0.1
+y2=1.9
 ypos1=0
 ypos2=2
 divy=5
@@ -59,8 +59,8 @@ legend=1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw}
 B 2 1640 -880 2440 -480 {flags=graph
-y1=-2.5
-y2=4
+y1=-2.2
+y2=1.7
 ypos1=0
 ypos2=2
 divy=5
@@ -87,8 +87,8 @@ autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -480 2440 -80 {flags=graph
-y1=-160
-y2=-0.22
+y1=-170
+y2=-2.9e-05
 ypos1=0
 ypos2=2
 divy=5
@@ -110,6 +110,30 @@ color=7
 node=ph(vout)
 rawfile=$netlist_dir/tb_opamp.raw
 autoload=1}
+B 2 840 -880 1640 -480 {flags=graph
+y1=-0.00052
+y2=0.00058
+ypos1=0
+ypos2=2
+divy=5
+subdivy=1
+unity=1
+x1=0
+x2=0.0003
+divx=5
+subdivx=1
+xlabmag=1.0
+ylabmag=1.0
+dataset=-1
+unitx=1
+logx=0
+logy=0
+sim_type=tran
+autoload=1
+hilight_wave=-1
+rawfile=$netlist_dir/tb_opamp.raw
+color=9
+node="\\"Offset; vout vin -\\""}
 N 590 -670 590 -630 {lab=VDD}
 N 590 -530 590 -500 {lab=VSS}
 N 500 -600 520 -600 {lab=Vin}
@@ -158,7 +182,7 @@ C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
          write tb_opamp.raw
          set appendwrite
 
-         dc vin -1 1 0.01
+         dc vin -1 1 0.1
          write tb_opamp.raw
          set appendwrite
 
@@ -186,7 +210,7 @@ C {lab_pin.sym} 590 -670 2 1 {name=p7 lab=VDD}
 C {vsource.sym} 330 -150 0 0 {name=Vss value=0 savecurrent=false}
 C {lab_pin.sym} 330 -180 0 1 {name=p8 sig_type=std_logic lab=VSS}
 C {gnd.sym} 330 -120 0 0 {name=l1 lab=GND}
-C {vsource.sym} 580 -270 0 0 {name=Vin value="AC=0.4 SIN(0 0.4 5k 0 0)" savecurrent=false
+C {vsource.sym} 580 -270 0 0 {name=Vin value="AC=0.4 SIN(0 0.2 5k 0 0)" savecurrent=false
 *PULSE(-1.8 1.8 0 0.1p 0.1p 100u 200u)}
 C {lab_pin.sym} 580 -300 0 1 {name=p9 sig_type=std_logic lab=Vin}
 C {vsource.sym} 200 -270 0 0 {name=Iref value=-5u savecurrent=false}
