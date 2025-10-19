@@ -32,18 +32,17 @@ sim_type=tran
 autoload=1
 hilight_wave=2
 rawfile=$netlist_dir/tb_opamp.raw
-hcursor1_y=1.3788278
-hcursor2_y=0.23218755}
+}
 B 2 840 -880 1640 -480 {flags=graph,unlocked
-y1=-1
+y1=-0.01
 y2=1.9
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-0.001
-x2=0.001
+x1=-0.01
+x2=0.01
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -62,8 +61,8 @@ autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -880 2440 -480 {flags=graph
-y1=-2.3
-y2=4.1
+y1=-0.96
+y2=4.64
 ypos1=0
 ypos2=2
 divy=5
@@ -130,33 +129,38 @@ C {title.sym} 160 -30 0 0 {name=l4 author="Rajinthan R"}
 C {vsource.sym} 200 -150 0 0 {name=Vdd value=1.8 savecurrent=false}
 C {lab_pin.sym} 200 -180 0 1 {name=p3 sig_type=std_logic lab=VDD}
 C {gnd.sym} 200 -120 0 0 {name=l3 lab=GND}
-C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
+C {code_shown.sym} -10 -1385 0 0 {name=SPICE only_toplevel=false value=
 "
 .include tb_opamp.save
 .options temp=27
 *.options savecurrents
-.param VCM = 0.9
+.option chgtol=4e-16 method=gear
 
 .control
+option seed = 8
+reset
+write tb_opamp.raw
+set appendwrite
 
-   save all
-   save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm8.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
-
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[W]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[L]
-
+let run = 0
+while run < 5
    let t = 20
    while t < 60
       let vsupply = 1.7
       while vsupply < 1.95
+         save all
+         save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
+         save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
+         save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm8.msky130_fd_pr__pfet_01v8[id]
+         save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
+         save @m.x1.xm3.msky130_fd_pr__nfet_01v8[W]
+         save @m.x1.xm3.msky130_fd_pr__nfet_01v8[L]
+         
          set temp = $&t
          alter @Vdd[dc] = $&vsupply
          echo Temperature is $t VDD is $vsupply
@@ -164,25 +168,24 @@ C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
          op
          remzerovec 
          write tb_opamp.raw
-         set appendwrite
 
-         dc vin -1m 1m 0.02m
+         dc vin -10m 10m 0.2m
          write tb_opamp.raw
-         set appendwrite
 
          ac dec 10 1 100Meg
          write tb_opamp.raw
-         set appendwrite
 
          tran 100n 300u
          write tb_opamp.raw
-         set appendwrite
 
          let vsupply = vsupply + 0.1
       end
       
       let t = t+15
    end
+   let run = run + 1
+   reset
+end
 quit 0
 .endc
 "}
@@ -259,12 +262,12 @@ m=1
 value=25p
 footprint=1206
 device="ceramic capacitor"}
-C {devices/code.sym} 530 -1170 0 0 {name=TT_MODELS
+C {devices/code.sym} 520 -1170 0 0 {name=TT_MODELS
 only_toplevel=true
 format="tcleval( @value )"
 value="
 ** opencircuitdesign pdks install
 .param MT_SWITCH = 1.0
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt
+.lib $::SKYWATER_MODELS/sky130.lib.spice tt_mm
 "
 spice_ignore=false}
