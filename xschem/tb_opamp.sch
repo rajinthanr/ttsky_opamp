@@ -23,11 +23,13 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 5 18 21"
+color="4 5 18 21 12 15"
 node="vp
 vout
 vouti
-vdd"
+vdd
+x1.vx
+x1.vg2"
 sim_type=tran
 autoload=1
 hilight_wave=2
