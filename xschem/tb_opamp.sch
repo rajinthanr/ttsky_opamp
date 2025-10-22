@@ -6,8 +6,8 @@ S {}
 F {}
 E {}
 B 2 840 -480 1640 -80 {flags=graph
-y1=-0.0022
-y2=2
+y1=-0.0023
+y2=1.9
 ypos1=0
 ypos2=2
 divy=5
@@ -19,7 +19,7 @@ divx=5
 subdivx=1
 xlabmag=1.0
 ylabmag=1.0
-dataset=-1
+dataset=1
 unitx=1
 logx=0
 logy=0
@@ -36,20 +36,20 @@ hilight_wave=2
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 840 -880 1640 -480 {flags=graph,unlocked
-y1=-0.01
-y2=1.9
+y1=-0.004
+y2=1.8
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-0.00089087533
-x2=0.0025000001
+x1=-0.00020221948
+x2=0.00029099877
 divx=5
 subdivx=4
 xlabmag=1.0
 ylabmag=1.0
-dataset=-1
+dataset=2
 unitx=1
 logx=0
 logy=0
@@ -63,8 +63,8 @@ autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -880 2440 -480 {flags=graph
-y1=-19.2
-y2=104.8
+y1=-42
+y2=78
 ypos1=0
 ypos2=2
 divy=5
@@ -79,7 +79,7 @@ ylabmag=1.0
 node="\\"Gain; vout vin / db20()\\"
 \\"Unity; 1\\""
 color="7 4"
-dataset=-1
+dataset=1
 unitx=1
 logx=1
 logy=0
@@ -89,8 +89,8 @@ autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -480 2440 -80 {flags=graph
-y1=-160
-y2=-0.22
+y1=-170
+y2=-0.23
 ypos1=0
 ypos2=2
 divy=5
@@ -102,7 +102,7 @@ divx=10
 subdivx=8
 xlabmag=1.0
 ylabmag=1.0
-dataset=-1
+dataset=1
 unitx=1
 logx=1
 logy=0
@@ -130,7 +130,7 @@ C {title.sym} 160 -30 0 0 {name=l4 author="Rajinthan R"}
 C {vsource.sym} 200 -150 0 0 {name=Vdd value=1.8 savecurrent=false}
 C {lab_pin.sym} 200 -180 0 1 {name=p3 sig_type=std_logic lab=VDD}
 C {gnd.sym} 200 -120 0 0 {name=l3 lab=GND}
-C {code_shown.sym} -10 -1385 0 0 {name=SPICE only_toplevel=false value=
+C {code_shown.sym} -10 -1375 0 0 {name=SPICE only_toplevel=false value=
 "
 .include tb_opamp.save
 .options temp=27
@@ -145,10 +145,10 @@ set appendwrite
 
 let run = 0
 while run < 1
-   let t = 20
-   while t < 60
-      let vsupply = 1.7
-      while vsupply < 1.95
+   let t = 30
+   while t < 70
+      let vsupply = 1.8
+      while vsupply < 1.85
          save all
          save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
          save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
@@ -164,13 +164,13 @@ while run < 1
          
          set temp = $&t
          alter @Vdd[dc] = $&vsupply
-         echo Temperature is $t VDD is $vsupply
+         echo Temperature is $&t VDD is $&vsupply
 
          op
          remzerovec 
          write tb_opamp.raw
 
-         dc vin -4m 4m 0.1m
+         dc vin -4m 4m 0.02m
          write tb_opamp.raw
 
          ac dec 10 1 100Meg
@@ -187,7 +187,7 @@ while run < 1
    let run = run + 1
    reset
 end
-quit 0
+*quit 0
 .endc
 "}
 C {lab_pin.sym} 750 -580 2 0 {name=p1 lab=Vout}

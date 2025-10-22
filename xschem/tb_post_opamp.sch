@@ -23,16 +23,14 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-color="4 5 18 21 12 15"
+color="4 7 18 21"
 node="vp
 vout
 vouti
-vdd
-x1.vx
-x1.vg2"
+vdd"
 sim_type=tran
 autoload=1
-hilight_wave=2
+hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 840 -880 1640 -480 {flags=graph,unlocked
@@ -178,7 +176,7 @@ while run < 1
    let run = run + 1
    reset
 end
-*quit 0
+quit 0
 .endc
 "}
 C {lab_pin.sym} 750 -580 2 0 {name=p1 lab=Vout}
@@ -190,7 +188,7 @@ C {vsource.sym} 330 -150 0 0 {name=Vss value=0 savecurrent=false}
 C {lab_pin.sym} 330 -180 0 1 {name=p8 sig_type=std_logic lab=VSS}
 C {gnd.sym} 330 -120 0 0 {name=l1 lab=GND}
 C {vcvs.sym} 680 -250 0 0 {name=E1 value=-0.5}
-C {vsource.sym} 590 -150 0 0 {name=Vcm value=0.6 savecurrent=false}
+C {vsource.sym} 590 -150 0 0 {name=Vcm value=0.9 savecurrent=false}
 C {lab_pin.sym} 590 -180 0 1 {name=Vcm1 sig_type=std_logic lab=VCM value=\{VCM\}}
 C {gnd.sym} 590 -120 0 0 {name=Vcm2 lab=GND
 value=\{VCM\}}
