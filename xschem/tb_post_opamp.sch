@@ -31,7 +31,7 @@ vdd"
 sim_type=tran
 autoload=1
 hilight_wave=-1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_opamp.raw
 }
 B 2 840 -880 1640 -480 {flags=graph,unlocked
 y1=-0.004
@@ -58,7 +58,7 @@ vout
 vouti"
 legend=1
 autoload=1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_opamp.raw
 }
 B 2 1640 -880 2440 -480 {flags=graph
 y1=-41
@@ -85,7 +85,7 @@ logy=0
 sim_type=ac
 hilight_wave=-1
 autoload=1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_opamp.raw
 }
 B 2 1640 -480 2440 -80 {flags=graph
 y1=-180
@@ -109,7 +109,7 @@ sim_type=ac
 hilight_wave=-1
 color=7
 node=ph(vout)
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_opamp.raw
 autoload=1
 }
 N 590 -670 590 -630 {lab=VDD}
@@ -139,7 +139,7 @@ C {code_shown.sym} 0 -1385 0 0 {name=SPICE only_toplevel=false value=
 .control
 option seed = 8
 reset
-write tb_opamp.raw
+write tb_post_opamp.raw
 set appendwrite
 
 let run = 0
@@ -148,25 +148,25 @@ while run < 1
    while t < 40
       let vsupply = 1.8
       while vsupply < 1.85
-         *save all
+         save all
 
          set temp = $&t
          alter @Vdd[dc] = $&vsupply
          echo Temperature is $&t VDD is $&vsupply
 
          op
-         remzerovec 
-         write tb_opamp.raw
+         *remzerovec 
+         write tb_post_opamp.raw
 
          dc vin -4m 4m 0.1m
-         write tb_opamp.raw
+         write tb_post_opamp.raw
 
          ac dec 10 1 100Meg
          remzerovec 
-         write tb_opamp.raw
+         write tb_post_opamp.raw
 
          tran 100n 300u
-         write tb_opamp.raw
+         write tb_post_opamp.raw
 
          let vsupply = vsupply + 0.1
       end
@@ -176,7 +176,7 @@ while run < 1
    let run = run + 1
    reset
 end
-quit 0
+*quit 0
 .endc
 "}
 C {lab_pin.sym} 750 -580 2 0 {name=p1 lab=Vout}
@@ -211,7 +211,7 @@ C {devices/launcher.sym} 900 -920 0 0 {name=h4
 descr="Load Waveforms/
 Annotate" 
 tclcommand="
-xschem raw_read $netlist_dir/tb_opamp.raw;
+xschem raw_read $netlist_dir/tb_post_opamp.raw;
 set show_hidden_texts 1;
 xschem annotate_op
 "
@@ -228,7 +228,7 @@ textwindow $netlist_dir/[file rootname [file tail [xschem get current_name]]].sa
 C {devices/launcher.sym} 1230 -960 0 0 {name=h2 
 descr="Load Waveforms" 
 tclcommand="
-xschem raw_read $netlist_dir/tb_opamp.raw tran
+xschem raw_read $netlist_dir/tb_post_opamp.raw tran
 "
 }
 C {devices/launcher.sym} 1230 -1010 0 0 {name=h3 
