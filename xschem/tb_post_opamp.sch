@@ -68,15 +68,15 @@ ypos2=2
 divy=5
 subdivy=4
 unity=1
-x1=0
-x2=8
+x1=-0.4
+x2=7.6
 divx=10
 subdivx=10
 xlabmag=1.0
 ylabmag=1.0
 node="\\"Gain; vout vin / db20()\\"
 \\"Gain; vouti vin / db20()\\"
-\\"Unity; 1\\""
+\\"Unity; 0\\""
 color="7 10 4"
 dataset=-1
 unitx=1
@@ -95,8 +95,8 @@ ypos2=2
 divy=5
 subdivy=4
 unity=1
-x1=0
-x2=8
+x1=-0.4
+x2=7.6
 divx=10
 subdivx=8
 xlabmag=1.0
@@ -107,8 +107,9 @@ logx=1
 logy=0
 sim_type=ac
 hilight_wave=-1
-color=7
-node=ph(vout)
+color="7 10"
+node="ph(vout)
+ph(vouti)"
 rawfile=$netlist_dir/tb_post_opamp.raw
 autoload=1
 }

@@ -32,7 +32,7 @@ x1.vx
 x1.vg2"
 sim_type=tran
 autoload=1
-hilight_wave=2
+hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 840 -880 1640 -480 {flags=graph,unlocked
@@ -43,8 +43,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-0.00020221948
-x2=0.00029099877
+x1=-0.004
+x2=0.004
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -91,7 +91,7 @@ rawfile=$netlist_dir/tb_opamp.raw
 }
 B 2 1640 -480 2440 -80 {flags=graph
 y1=-170
-y2=-0.23
+y2=180
 ypos1=0
 ypos2=2
 divy=5
@@ -109,8 +109,9 @@ logx=1
 logy=0
 sim_type=ac
 hilight_wave=-1
-color=7
-node=ph(vout)
+color="7 10"
+node="ph(vout)
+ph(vouti)"
 rawfile=$netlist_dir/tb_opamp.raw
 autoload=1
 hcursor1_y=-103.06548}
