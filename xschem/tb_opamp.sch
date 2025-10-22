@@ -78,7 +78,7 @@ xlabmag=1.0
 ylabmag=1.0
 node="\\"Gain; vout vin / db20()\\"
 \\"Gain; vouti vin / db20()\\"
-\\"Unity; 1\\""
+\\"Unity; 0\\""
 color="7 10 4"
 dataset=1
 unitx=1

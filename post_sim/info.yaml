@@ -26,15 +26,15 @@ XM8 Vout Vouti VDD VDD sky130_fd_pr__pfet_01v8 L=0.5 W=20 nf=4 ad=2.9 as=4.35 pd
 + sd=0 mult=1 m=1
 XM9 Iref EN VGref VSS sky130_fd_pr__nfet_01v8 L=2 W=2 nf=1 ad=0.58 as=0.58 pd=4.58 ps=4.58 nrd=0.145 nrs=0.145 sa=0 sb=0 sd=0
 + mult=1 m=1
-XC1 Vout net1 sky130_fd_pr__cap_mim_m3_1 W=30 L=30 MF=1 m=1
-XR3 net1 Vouti VSS sky130_fd_pr__res_xhigh_po_0p35 L=5 mult=1 m=1
+XC1 Vouti net1 sky130_fd_pr__cap_mim_m3_1 W=40 L=40 MF=1 m=1
+XR3 net1 Vout VSS sky130_fd_pr__res_xhigh_po_0p35 L=1.75 mult=1 m=1
 XM11 Vx VSS VSS VSS sky130_fd_pr__nfet_01v8 L=4 W=10 nf=2 ad=1.45 as=2.9 pd=10.58 ps=21.16 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
 + mult=1 m=1
-XM12 VSS VSS VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=2 nf=2 ad=0.29 as=0.58 pd=2.58 ps=5.16 nrd=0.145 nrs=0.145 sa=0 sb=0 sd=0
+XM12 VSS VSS VSS VSS sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=2 ad=0.58 as=1.16 pd=4.58 ps=9.16 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
 + mult=1 m=1
 XM10 Vouti VDD VDD VDD sky130_fd_pr__pfet_01v8 L=4 W=12 nf=2 ad=1.74 as=3.48 pd=12.58 ps=25.16 nrd=0.0241666666666667
 + nrs=0.0241666666666667 sa=0 sb=0 sd=0 mult=1 m=1
-XM13 VDD VDD VDD VDD sky130_fd_pr__pfet_01v8 L=0.5 W=10 nf=2 ad=1.45 as=2.9 pd=10.58 ps=21.16 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
+XM13 VDD VDD VDD VDD sky130_fd_pr__pfet_01v8 L=0.5 W=20 nf=2 ad=2.9 as=5.8 pd=20.58 ps=41.16 nrd=0.0145 nrs=0.0145 sa=0 sb=0 sd=0
 + mult=1 m=1
 **.ends
 .GLOBAL VDD
