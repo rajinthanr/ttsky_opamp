@@ -30,7 +30,7 @@ vdd"
 sim_type=tran
 autoload=1
 hilight_wave=-1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_closed_opamp.raw
 }
 B 2 1640 -1280 2440 -880 {flags=graph,unlocked
 y1=-0.1
@@ -51,13 +51,12 @@ unitx=1
 logx=0
 logy=0
 sim_type=dc
-color="4 5 18"
+color="4 5"
 node="vin
-vout
-vouti"
+vout"
 legend=1
 autoload=1
-rawfile=$netlist_dir/tb_opamp.raw}
+rawfile=$netlist_dir/tb_post_closed_opamp.raw}
 B 2 1640 -880 2440 -480 {flags=graph
 y1=-2.2
 y2=1.7
@@ -73,10 +72,8 @@ subdivx=10
 xlabmag=1.0
 ylabmag=1.0
 node="\\"Unity; 1\\"
-\\"Gain; vout vin /\\"
-\\"Gain(1st); vouti vin /\\"
-\\"Gain(2nd); vout vouti /\\""
-color="4 5 18 6"
+\\"Gain; vout vin /\\""
+color="4 5"
 dataset=-1
 unitx=1
 logx=1
@@ -84,7 +81,7 @@ logy=1
 sim_type=ac
 hilight_wave=-1
 autoload=1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_closed_opamp.raw
 }
 B 2 1640 -480 2440 -80 {flags=graph
 y1=-170
@@ -108,11 +105,11 @@ sim_type=ac
 hilight_wave=-1
 color=7
 node=ph(vout)
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_closed_opamp.raw
 autoload=1}
 B 2 840 -880 1640 -480 {flags=graph
-y1=-0.00058
-y2=0.00054
+y1=-0.21
+y2=0.2
 ypos1=0
 ypos2=2
 divy=5
@@ -131,9 +128,10 @@ logy=0
 sim_type=tran
 autoload=1
 hilight_wave=-1
-rawfile=$netlist_dir/tb_opamp.raw
+rawfile=$netlist_dir/tb_post_closed_opamp.raw
 color=9
-node="\\"Offset; vout vin -\\""}
+node="\\"Offset; vout vin -\\""
+}
 N 590 -670 590 -630 {lab=VDD}
 N 590 -530 590 -500 {lab=VSS}
 N 500 -600 520 -600 {lab=Vin}
@@ -149,7 +147,7 @@ C {lab_pin.sym} 200 -180 0 1 {name=p3 sig_type=std_logic lab=VDD}
 C {gnd.sym} 200 -120 0 0 {name=l3 lab=GND}
 C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
 "
-.include tb_opamp.save
+.include /foss/designs/ttsky_opamp/post_sim/post_opamp.spice
 .options temp=27
 *.options savecurrents
 .param VCM = 0.9
@@ -157,17 +155,6 @@ C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
 .control
 
    save all
-   save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
-
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[W]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[L]
 
    let t = 20
    while t < 60
@@ -175,23 +162,23 @@ C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
       while vsupply < 2.0
          set temp = $&t
          alter @Vdd[dc] = $&vsupply
-         echo Temperature is $t VDD is $vsupply
+         echo Temperature is $&t VDD is $&vsupply
 
          op
          remzerovec 
-         write tb_opamp.raw
+         write tb_post_closed_opamp.raw
          set appendwrite
 
          dc vin -1 1 0.1
-         write tb_opamp.raw
+         write tb_post_closed_opamp.raw
          set appendwrite
 
          ac dec 10 1 100Meg
-         write tb_opamp.raw
+         write tb_post_closed_opamp.raw
          set appendwrite
 
          tran 100n 300u
-         write tb_opamp.raw
+         write tb_post_closed_opamp.raw
          set appendwrite
 
          let vsupply = vsupply + 0.1
@@ -220,7 +207,7 @@ C {devices/launcher.sym} 900 -920 0 0 {name=h4
 descr="Load Waveforms/
 Annotate" 
 tclcommand="
-xschem raw_read $netlist_dir/tb_opamp.raw;
+xschem raw_read $netlist_dir/tb_post_closed_opamp.raw;
 set show_hidden_texts 1;
 xschem annotate_op
 "
@@ -228,16 +215,10 @@ xschem annotate_op
 C {devices/launcher.sym} 900 -980 0 0 {name=h5
 descr="Netlist & sim" 
 tclcommand="xschem netlist; xschem simulate"}
-C {devices/launcher.sym} 900 -1030 0 0 {name=h1
-descr="Generate .save lines" 
-tclcommand="write_data [save_fet_params] $netlist_dir/[file rootname [file tail [xschem get current_name]]].save
-textwindow $netlist_dir/[file rootname [file tail [xschem get current_name]]].save
-"
-}
 C {devices/launcher.sym} 1230 -960 0 0 {name=h2 
 descr="Load Waveforms" 
 tclcommand="
-xschem raw_read $netlist_dir/tb_opamp.raw tran
+xschem raw_read $netlist_dir/tb_post_closed_opamp.raw tran
 "
 }
 C {devices/launcher.sym} 1230 -1010 0 0 {name=h3 
@@ -249,7 +230,7 @@ xschem annotate_op
 }
 C {lab_pin.sym} 640 -570 0 1 {name=p2 lab=Vouti}
 C {lab_pin.sym} 520 -620 0 0 {name=p17 lab=EN}
-C {vsource.sym} 450 -150 0 0 {name=Ven value=1.8 savecurrent=false}
+C {vsource.sym} 450 -150 0 0 {name=Ven value=0 savecurrent=false}
 C {lab_pin.sym} 450 -180 0 1 {name=p18 sig_type=std_logic lab=EN}
 C {gnd.sym} 450 -120 0 0 {name=l6 lab=GND}
 C {gnd.sym} 720 -500 0 0 {name=Vcm4 lab=GND
@@ -265,7 +246,7 @@ format="tcleval( @value )"
 value="
 ** opencircuitdesign pdks install
 .param MT_SWITCH = 1.0
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt
+.lib $::SKYWATER_MODELS/sky130.lib.spice ff
 "
 spice_ignore=false}
 C {vsource.sym} 580 -150 0 0 {name=Vcm value=\{VCM\} savecurrent=false}

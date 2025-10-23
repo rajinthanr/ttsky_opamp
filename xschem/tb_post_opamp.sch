@@ -13,13 +13,13 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=0
-x2=0.0003
+x1=0.00020098722
+x2=0.00020284021
 divx=5
 subdivx=1
 xlabmag=1.0
 ylabmag=1.0
-dataset=-1
+dataset=2
 unitx=1
 logx=0
 logy=0
@@ -31,7 +31,8 @@ sim_type=tran
 autoload=1
 hilight_wave=-1
 rawfile=$netlist_dir/tb_post_opamp.raw
-}
+hcursor2_y=0.25189976
+hcursor1_y=1.5092267}
 B 2 840 -880 1640 -480 {flags=graph,unlocked
 y1=-0.004
 y2=1.9
@@ -59,8 +60,8 @@ autoload=1
 rawfile=$netlist_dir/tb_post_opamp.raw
 }
 B 2 1640 -880 2440 -480 {flags=graph
-y1=-41
-y2=78
+y1=-36
+y2=79
 ypos1=0
 ypos2=2
 divy=5
@@ -75,7 +76,7 @@ ylabmag=1.0
 node="\\"Gain (dB); vout vin / db20()\\"
 \\"Unity; 0\\""
 color="7 4"
-dataset=-1
+dataset=2
 unitx=1
 logx=1
 logy=0
@@ -98,7 +99,7 @@ divx=10
 subdivx=8
 xlabmag=1.0
 ylabmag=1.0
-dataset=-1
+dataset=2
 unitx=1
 logx=1
 logy=0
@@ -173,7 +174,7 @@ while run < 1
    let run = run + 1
    reset
 end
-*quit 0
+quit 0
 .endc
 "}
 C {lab_pin.sym} 750 -580 2 0 {name=p1 lab=Vout}
@@ -248,13 +249,13 @@ m=1
 value=25p
 footprint=1206
 device="ceramic capacitor"}
-C {devices/code.sym} 520 -1170 0 0 {name=TT_MODELS
+C {devices/code.sym} 20 -240 0 0 {name=TT_MODELS
 only_toplevel=true
 format="tcleval( @value )"
 value="
 ** opencircuitdesign pdks install
 .param MT_SWITCH = 1.0
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt
+.lib $::SKYWATER_MODELS/sky130.lib.spice fs
 "
 spice_ignore=false}
 C {/foss/designs/ttsky_opamp/xschem/post_opamp.sym} 590 -580 0 0 {name=x1}
