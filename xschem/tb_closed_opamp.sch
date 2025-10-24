@@ -6,8 +6,8 @@ S {}
 F {}
 E {}
 B 2 840 -480 1640 -80 {flags=graph
-y1=0.69
-y2=1.9
+y1=0.66643088
+y2=1.1620469
 ypos1=0
 ypos2=2
 divy=5
@@ -29,10 +29,10 @@ vout
 vdd"
 sim_type=tran
 autoload=1
-hilight_wave=-1
+hilight_wave=0
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 1640 -1280 2440 -880 {flags=graph,unlocked
+B 2 1810 -1280 2610 -880 {flags=graph,unlocked
 y1=-0.1
 y2=1.9
 ypos1=0
@@ -40,8 +40,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-1
-x2=1
+x1=3.7435272
+x2=11.743526
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -58,7 +58,7 @@ vouti"
 legend=1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw}
-B 2 1640 -880 2440 -480 {flags=graph
+B 2 1810 -880 2610 -480 {flags=graph
 y1=-2.2
 y2=1.7
 ypos1=0
@@ -66,8 +66,8 @@ ypos2=2
 divy=5
 subdivy=8
 unity=1
-x1=0
-x2=8
+x1=3.7435272
+x2=11.743526
 divx=10
 subdivx=10
 xlabmag=1.0
@@ -86,7 +86,7 @@ hilight_wave=-1
 autoload=1
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 1640 -480 2440 -80 {flags=graph
+B 2 1810 -480 2610 -80 {flags=graph
 y1=-170
 y2=-2.9e-05
 ypos1=0
@@ -94,8 +94,8 @@ ypos2=2
 divy=5
 subdivy=4
 unity=1
-x1=0
-x2=8
+x1=3.7435272
+x2=11.743526
 divx=10
 subdivx=8
 xlabmag=1.0
@@ -111,8 +111,8 @@ node=ph(vout)
 rawfile=$netlist_dir/tb_opamp.raw
 autoload=1}
 B 2 840 -880 1640 -480 {flags=graph
-y1=-0.14
-y2=1.9
+y1=0.0006
+y2=0.0017
 ypos1=0
 ypos2=2
 divy=5
