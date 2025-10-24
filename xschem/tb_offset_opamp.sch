@@ -32,15 +32,15 @@ autoload=1
 hilight_wave=-1
 rawfile=$netlist_dir/tb_opamp.raw
 }
-B 2 1640 -1280 2440 -880 {flags=graph,unlocked
-y1=-0.1
-y2=1.9
+B 2 840 -1520 1640 -1120 {flags=graph,unlocked
+y1=0
+y2=0.01
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=-1
+x1=0
 x2=1
 divx=5
 subdivx=4
@@ -50,90 +50,14 @@ dataset=-1
 unitx=1
 logx=0
 logy=0
-sim_type=dc
-color="4 5 18"
-node="vin
-vout
-vouti"
 legend=1
-autoload=1
-rawfile=$netlist_dir/tb_opamp.raw}
-B 2 1640 -880 2440 -480 {flags=graph
-y1=-2.2
-y2=1.7
-ypos1=0
-ypos2=2
-divy=5
-subdivy=8
-unity=1
-x1=0
-x2=8
-divx=10
-subdivx=10
-xlabmag=1.0
-ylabmag=1.0
-node="\\"Unity; 1\\"
-\\"Gain; vout vin /\\"
-\\"Gain(1st); vouti vin /\\"
-\\"Gain(2nd); vout vouti /\\""
-color="4 5 18 6"
-dataset=-1
-unitx=1
-logx=1
-logy=1
-sim_type=ac
-hilight_wave=-1
-autoload=1
-rawfile=$netlist_dir/tb_opamp.raw
-}
-B 2 1640 -480 2440 -80 {flags=graph
-y1=-170
-y2=-2.9e-05
-ypos1=0
-ypos2=2
-divy=5
-subdivy=4
-unity=1
-x1=0
-x2=8
-divx=10
-subdivx=8
-xlabmag=1.0
-ylabmag=1.0
-dataset=-1
-unitx=1
-logx=1
-logy=0
-sim_type=ac
-hilight_wave=-1
-color=7
-node=ph(vout)
-rawfile=$netlist_dir/tb_opamp.raw
-autoload=1}
-B 2 840 -880 1640 -480 {flags=graph
-y1=-0.14
-y2=1.9
-ypos1=0
-ypos2=2
-divy=5
-subdivy=1
-unity=1
-x1=0
-x2=0.0003
-divx=5
-subdivx=1
-xlabmag=1.0
-ylabmag=1.0
-dataset=-1
-unitx=1
-logx=0
-logy=0
-sim_type=tran
-autoload=1
-hilight_wave=-1
-rawfile=$netlist_dir/tb_opamp.raw
-color=9
-node="\\"Offset; vout vin -\\""}
+autoload=0
+mode=HistoV
+color="4 10"
+node="vout
+vin"
+sweep=idx
+sim_type=dc}
 N 590 -670 590 -630 {lab=VDD}
 N 590 -530 590 -500 {lab=VSS}
 N 500 -600 520 -600 {lab=Vin}
@@ -147,28 +71,15 @@ C {title.sym} 160 -30 0 0 {name=l4 author="Rajinthan R"}
 C {vsource.sym} 200 -150 0 0 {name=Vdd value=1.8 savecurrent=false}
 C {lab_pin.sym} 200 -180 0 1 {name=p3 sig_type=std_logic lab=VDD}
 C {gnd.sym} 200 -120 0 0 {name=l3 lab=GND}
-C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
+C {code_shown.sym} 20 -1245 0 0 {name=SPICE only_toplevel=false value=
 "
-.include tb_opamp.save
 .options temp=27
 *.options savecurrents
-.param VCM = 0.9
 
 .control
-
    save all
-   save @m.x1.xm1.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm2.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm4.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm5.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm6.msky130_fd_pr__pfet_01v8[id]
-   save @m.x1.xm7.msky130_fd_pr__nfet_01v8[id]
-   save @m.x1.xm9.msky130_fd_pr__nfet_01v8[id]
-
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[W]
-   save @m.x1.xm3.msky130_fd_pr__nfet_01v8[L]
-
+ let run=0
+  dowhile run < 2
    let t = 20
    while t < 60
       let vsupply = 1.7
@@ -182,23 +93,13 @@ C {code_shown.sym} 10 -1235 0 0 {name=SPICE only_toplevel=false value=
          write tb_opamp.raw
          set appendwrite
 
-         dc vin -1 1 0.1
-         write tb_opamp.raw
-         set appendwrite
-
-         ac dec 10 1 100Meg
-         write tb_opamp.raw
-         set appendwrite
-
-         tran 100n 300u
-         write tb_opamp.raw
-         set appendwrite
-
          let vsupply = vsupply + 0.1
       end
       
       let t = t+15
    end
+let run = run+1
+end
 quit 0
 .endc
 "}
@@ -210,7 +111,7 @@ C {lab_pin.sym} 590 -670 2 1 {name=p7 lab=VDD}
 C {vsource.sym} 330 -150 0 0 {name=Vss value=0 savecurrent=false}
 C {lab_pin.sym} 330 -180 0 1 {name=p8 sig_type=std_logic lab=VSS}
 C {gnd.sym} 330 -120 0 0 {name=l1 lab=GND}
-C {vsource.sym} 580 -270 0 0 {name=Vin value="AC=0.4 SIN(0 0.2 5k 0 0)" savecurrent=false
+C {vsource.sym} 580 -270 0 0 {name=Vin value="DC=0.9 AC=0.4 SIN(0 0.2 5k 0 0)" savecurrent=false
 *PULSE(-1.8 1.8 0 0.1p 0.1p 100u 200u)}
 C {lab_pin.sym} 580 -300 0 1 {name=p9 sig_type=std_logic lab=Vin}
 C {vsource.sym} 200 -270 0 0 {name=Iref value=-5u savecurrent=false}
@@ -238,7 +139,64 @@ C {/foss/designs/ttsky_opamp/xschem/opamp.sym} 590 -580 0 0 {name=x1}
 C {devices/launcher.sym} 1230 -960 0 0 {name=h2 
 descr="Load Waveforms" 
 tclcommand="
-xschem raw_read $netlist_dir/tb_opamp.raw tran
+xschem raw_read $netlist_dir/tb_opamp.raw op
+# Helper procedure to round a value 'a' to the nearest 'size'
+proc xround \{a size\} \{
+    return [expr \{round($a/$size) * $size\}]
+\}
+
+# Main procedure to generate the histogram
+proc get_histo \{\} \{
+    # Define the bin size for the histogram
+    set size [expr \{1.0 / 256.0\}]
+    
+    # Clear temporary arrays, ignoring errors if they don't exist
+    catch \{unset f1 f2\}
+    
+    # Read all values from 'f1' and 'f2' from the last simulation (-1)
+    # and build the histogram counts in the 'f1' and 'f2' arrays.
+    foreach v1 [xschem raw values vin -1] v2 [xschem raw values vout -1] \{
+        set v1 [xround $v1 $size]
+        set v2 [xround $v2 $size]
+        
+        # Increment the count for the corresponding bin
+        if \{![info exists f1($v1)]\} \{ set f1($v1) 1\} else \{incr f1($v1)\}
+        if \{![info exists f2($v2)]\} \{ set f2($v2) 1\} else \{incr f2($v2)\}
+    \}
+    
+    # Create a new in-memory raw file to store the histogram data
+    # Plot name: "distrib", Sweep vector: "freq", Range: 0.0 to 1.0, Step: $size
+    xschem raw new distrib distrib freq 0.0 1.0 $size
+    
+    # Add two new vectors (traces) to this new raw file
+    xschem raw add f1
+    xschem raw add f2
+    
+    # Iterate through all possible bins from 0.0 to 1.0
+    set j 0
+    for \{set i 0.0\} \{$i <= 1.0\} \{set i [expr \{$i + $size\}] \} \{
+        # Get the count for the bin, or 0 if no values fell in it
+        set v1 0
+        set v2 0
+        if \{[info exists f1($i)]\} \{ set v1 $f1($i) \}
+        if \{[info exists f2($i)]\} \{ set v2 $f2($i) \}
+        
+        # Set the j-th data point in the new raw file vectors
+        xschem raw set f1 $j $v1
+        xschem raw set f2 $j $v2
+        
+        # Increment the data point index
+        incr j
+    \}
+\}
+
+# --- Script Execution ---
+
+# Run the histogram procedure
+get_histo
+
+# Redraw xschem to show the new "distrib" plot
+xschem redraw
 "
 }
 C {devices/launcher.sym} 1230 -1010 0 0 {name=h3 
@@ -248,7 +206,6 @@ set show_hidden_texts 1;
 xschem annotate_op
 "
 }
-C {lab_pin.sym} 640 -570 0 1 {name=p2 lab=Vouti}
 C {lab_pin.sym} 520 -620 0 0 {name=p17 lab=EN}
 C {vsource.sym} 450 -150 0 0 {name=Ven value=1.8 savecurrent=false}
 C {lab_pin.sym} 450 -180 0 1 {name=p18 sig_type=std_logic lab=EN}
@@ -260,7 +217,7 @@ m=1
 value=25p
 footprint=1206
 device="ceramic capacitor"}
-C {devices/code.sym} 530 -1170 0 0 {name=TT_MODELS
+C {devices/code.sym} 20 -220 0 0 {name=TT_MODELS
 only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -269,7 +226,7 @@ value="
 .lib $::SKYWATER_MODELS/sky130.lib.spice tt_mm
 "
 spice_ignore=false}
-C {vsource.sym} 580 -150 0 0 {name=Vcm value=\{VCM\} savecurrent=false}
+C {vsource.sym} 580 -150 0 0 {name=Vcm value=0.9 savecurrent=false}
 C {lab_pin.sym} 580 -180 0 1 {name=Vcm1 sig_type=std_logic lab=VCM value=\{VCM\}}
 C {gnd.sym} 580 -120 0 0 {name=Vcm2 lab=GND
 value=\{VCM\}}
